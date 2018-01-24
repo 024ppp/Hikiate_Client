@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.administrator.Hikiate_Client.MainActivity">
+
+        <!-- <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"/>-->
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="1">
+
+            <!-- 網・枠 -->
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/textView1"
+                style="@style/TextViewStyle_Page2_Title"
+                android:layout_width="126dp"
+                android:text="設定" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/TextViewStyle_Page2_Title"
+                android:layout_width="151dp"
+                android:text="枠網" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/TextViewStyle_Page2_Title"
+                android:layout_width="62dp"
+                android:text="判定" />
+        </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblWaku7"
+                    android:text="７枠"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet7"
+                    style="@style/TextViewStyle_White_Page2"/>
+                <EditText
+                    android:id="@+id/txtWaku7"
+                    style="@style/EditTextStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblHantei7"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblAmi6"
+                    android:text="６網"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet6"
+                    style="@style/TextViewStyle_White_Page2"  />
+                <EditText
+                    android:id="@+id/txtAmi6"
+                    style="@style/EditTextStyle_Page2" />
+                <TextView
+                    android:id="@+id/lblHantei6"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblWaku5"
+                    android:text="５枠"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet5"
+                    style="@style/TextViewStyle_White_Page2"  />
+                <EditText
+                    android:id="@+id/txtWaku5"
+                    style="@style/EditTextStyle_Page2" />
+                <TextView
+                    android:id="@+id/lblHantei5"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblAmi4"
+                    android:text="４網"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet4"
+                    style="@style/TextViewStyle_White_Page2"  />
+                <EditText
+                    android:id="@+id/txtAmi4"
+                    style="@style/EditTextStyle_Page2" />
+                <TextView
+                    android:id="@+id/lblHantei4"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblWaku3"
+                    android:text="３枠"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet3"
+                    style="@style/TextViewStyle_White_Page2"  />
+                <EditText
+                    android:id="@+id/txtWaku3"
+                    style="@style/EditTextStyle_Page2" />
+                <TextView
+                    android:id="@+id/lblHantei3"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblAmi2"
+                    android:text="２網"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet2"
+                    style="@style/TextViewStyle_White_Page2"  />
+                <EditText
+                    android:id="@+id/txtAmi2"
+                    style="@style/EditTextStyle_Page2" />
+                <TextView
+                    android:id="@+id/lblHantei2"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    android:id="@+id/lblWaku1"
+                    android:text="１枠"
+                    style="@style/TextViewStyle_Page2"/>
+                <TextView
+                    android:id="@+id/lblSet1"
+                    style="@style/TextViewStyle_White_Page2"  />
+                <EditText
+                    android:id="@+id/txtWaku1"
+                    style="@style/EditTextStyle_Page2" />
+                <TextView
+                    android:id="@+id/lblHantei1"
+                    style="@style/TextViewStyle_White_Page2"  />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

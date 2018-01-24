@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.administrator.Hikiate_Client.MainActivity">
+
+        <!-- <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"/>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout style="@style/LinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/lblSagyo"
+                style="@style/TextViewStyle"
+                android:text="作業者" />
+
+            <EditText
+                android:id="@+id/txtSagyo"
+                style="@style/EditTextStyle" />
+        </LinearLayout>
+
+        <View style="@style/blockBorder" />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/nfc_logo"
+                android:layout_centerInParent="true"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                />
+        </RelativeLayout>
+
+        <LinearLayout style="@style/LinearLayoutStyle">
+            <TextView
+                android:id="@+id/lblKikai"
+                style="@style/TextViewStyle"
+                android:text="機械No" />
+
+            <EditText
+                android:id="@+id/txtKikai"
+                style="@style/EditTextStyle" />
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

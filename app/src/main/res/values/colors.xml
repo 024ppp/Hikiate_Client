@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="gray">#A4A4A4</color>
+    <color name="white">#FFFFFF</color>
+    <color name="szk_lbl">#C0C0FF</color>
+    <color name="szk_txt">#FFFFC0</color>
+    <color name="accent">#FF4081</color>
+    <color name="tabBack">#FE2E64</color>
+    <color name="nomBack">#F2F2F2</color>
+    <color name="gray2">#E6E6E6</color>
+    <color name="black">#000000</color>
+    <!-- タイトル背景 -->
+    <color name="title">#ff6767</color>
+    <color name="title2">#ff6767</color>
+    <!-- データ1背景 -->
+    <color name="data1">#FFFFFF</color>
+    <!-- データ2背景 -->
+    <color name="data2">#E6E6E6</color>
+
+    <color name="discharge">#89c3eb</color>
+    <color name="kenryo">#FF4081</color>
+    <color name="hokan">#ffd900</color>
+
+    <color name="ok">#9AFE2E</color>
+    <color name="low">#2E9AFE</color>
+    <color name="high">#FE2E2E</color>
+
+</resources>

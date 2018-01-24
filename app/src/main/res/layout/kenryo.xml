@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.Hikiate_Client.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle2">
+            <TextView
+                style="@style/title2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="移動票No."/>
+            <EditText
+                style="@style/item"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtIdo"/>
+            <android.support.v4.widget.Space
+                android:layout_width="45dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                style="@style/title2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="缶数"/>
+            <TextView
+                style="@style/item"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtCansuu"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+            <TextView
+                style="@style/title2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="配合粉"/>
+            <TextView
+                style="@style/item"
+                android:layout_width="247dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtZainmk"/>
+        </LinearLayout>
+
+        <View style="@style/blockBorder" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/title2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="@string/title1"/>
+
+            <TextView
+                style="@style/title2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/title3"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:background="@color/black">
+            <ListView
+                android:id="@+id/listKen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#000000"
+                android:dividerHeight="1sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayoutStyle2">
+            <TextView
+                style="@style/title2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="設定値"/>
+            <TextView
+                style="@style/item"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:id="@+id/txtJuryo"/>
+            <TextView
+                android:text="g"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            style="@style/LinearLayoutStyle">
+            <TextView
+                style="@style/title2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="計量値"/>
+            <TextView
+                style="@style/item"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:id="@+id/txtKeiryo"/>
+            <TextView
+                android:text="g"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
