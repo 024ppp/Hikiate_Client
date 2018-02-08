@@ -11,45 +11,12 @@ class Data {
     private String canTag = "";
     private String hantei = "";
 
-    public void setData(int mode, String[] items) {
+    public void setData(String[] items) {
         for (int i = 0; i < items.length; i++) {
-            switch (mode) {
-                //排出
-                case 1:
-                    switch (i) {
-                        case 0: setNumber(items[i]);
-                            break;
-                        case 1: setZainmk(items[i]);
-                            break;
-                        case 2: setKokban(items[i]);
-                            break;
-                        case 3: setCansuu(items[i]);
-                            break;
-                        case 4: setVkonno(items[i]);
-                            break;
-                        case 5: setMeiban(items[i]);
-                            break;
-                        default:
-                    }
+            switch (i) {
+                case 0: setNumber(items[i]);
                     break;
-
-                //検量
-                case 3:
-                    switch (i) {
-                        case 0: setNumber(items[i]);
-                            break;
-                        default:
-                    }
-                    break;
-                //保管
-                case 4:
-                    switch (i) {
-                        case 0: setNumber(items[i]);
-                            break;
-                        case 1: setCanTag(items[i]);
-                            break;
-                        default:
-                    }
+                case 1: setCanTag(items[i]);
                     break;
                 default:
             }

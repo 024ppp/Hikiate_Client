@@ -28,25 +28,161 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
         <LinearLayout
             android:id="@+id/layout"
             android:layout_width="match_parent"
-            android:layout_height="380dp"
-            android:layout_weight="0.35"
+            android:layout_height="365dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
             android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:weightSum="1">
 
-            <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/imageView"
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/title2"
+                    android:text="工管No."/>
+                <EditText
+                    style="@style/item"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/nfc_logo"
-                    android:layout_centerInParent="true"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    />
-            </RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtBcd"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/title2"
+                    android:text="品番"/>
+                <EditText
+                    style="@style/item"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:id="@+id/txtHinban"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/title2"
+                    android:text="ロットNo."/>
+                <EditText
+                    style="@style/item"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:id="@+id/txtLotno"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    style="@style/title2"
+                    android:text="カーボン"/>
+                <EditText
+                    style="@style/item"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:id="@+id/txtCarbon"/>
+            </LinearLayout>
+
+            <View style="@style/blockBorder" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/title2"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:text="N"/>
+                <TextView
+                    style="@style/title2"
+                    android:gravity="center"
+                    android:text="缶タグ"/>
+                <TextView
+                    style="@style/title2"
+                    android:gravity="center"
+                    android:text="工管No."/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/item3"
+                    android:text="1."/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtC1"/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtK1"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/item3"
+                    android:text="2."/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtC2"/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtK2"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/item3"
+                    android:text="3."/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtC3"/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtK3"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/item3"
+                    android:text="4."/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtC4"/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtK4"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/LinearLayoutStyle2">
+                <TextView
+                    style="@style/item3"
+                    android:text="5."/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtC5"/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtK5"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    style="@style/item3"
+                    android:text="6."/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtC6"/>
+                <EditText
+                    style="@style/item2"
+                    android:id="@+id/txtK6"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -63,6 +199,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                 android:background="#ffff"
                 android:gravity="center_vertical"
                 android:textColor="#FF0000"
+                android:text="サーバ接続エラー。"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -73,18 +210,18 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                 <Button
                     android:id="@+id/btnClear"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="クリア"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btnUpd"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="登録"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>

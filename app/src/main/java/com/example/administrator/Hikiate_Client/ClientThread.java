@@ -59,6 +59,7 @@ public class ClientThread implements Runnable {
             //接続成功時
             if (isStartup) {
                 //bw.write(ProcessCommand.SAG.getString() + "\n");    //作業者検索コマンドを投げる
+                bw.write(ProcessCommand.CNN.getString() + "\n");    //接続コマンドを投げる
             }
             else {
                 bw.write(ProcessCommand.REC.getString() + "\n");    //再接続コマンドを投げる

@@ -13,11 +13,11 @@ public enum ProcessCommand {
     CAN("CAN", 1005),
     CLR("CLR", 1006),
     MSV("MSV", 1007),
+    CBN("CBN", 1008),
     OPE("OPE", 5555),
-    DUP("DUP", 6001),
-    HUP("HUP", 6002),
-    KUP("KUP", 6003),
-    SUP("SUP", 6004),
+    UPD("UPD", 6001),
+
+    CNN("CNN", 6666),
     REC("REC", 7777),
     MSG("MSG", 8888),
     ERR("ERR", 9999)

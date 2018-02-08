@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">まとめ</string>
+    <string name="app_name">引当て</string>
     <string name="action_settings">設定</string>
     <string name="action_reconnection">再接続</string>
     <string name="action_finish">終了</string>
