@@ -108,7 +108,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                 <TextView
                     style="@style/title2"
                     android:gravity="center"
-                    android:text="工管No."/>
+                    android:text="ロットNo."/>
             </LinearLayout>
 
             <LinearLayout
@@ -121,6 +121,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                     android:id="@+id/txtC1"/>
                 <EditText
                     style="@style/item2"
+                    android:focusable="false"
                     android:id="@+id/txtK1"/>
             </LinearLayout>
             <LinearLayout
@@ -133,6 +134,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                     android:id="@+id/txtC2"/>
                 <EditText
                     style="@style/item2"
+                    android:focusable="false"
                     android:id="@+id/txtK2"/>
             </LinearLayout>
             <LinearLayout
@@ -145,6 +147,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                     android:id="@+id/txtC3"/>
                 <EditText
                     style="@style/item2"
+                    android:focusable="false"
                     android:id="@+id/txtK3"/>
             </LinearLayout>
             <LinearLayout
@@ -157,6 +160,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                     android:id="@+id/txtC4"/>
                 <EditText
                     style="@style/item2"
+                    android:focusable="false"
                     android:id="@+id/txtK4"/>
             </LinearLayout>
             <LinearLayout
@@ -169,6 +173,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                     android:id="@+id/txtC5"/>
                 <EditText
                     style="@style/item2"
+                    android:focusable="false"
                     android:id="@+id/txtK5"/>
             </LinearLayout>
             <LinearLayout
@@ -181,6 +186,7 @@ tools:context="com.example.administrator.Hikiate_Client.MainActivity">
                     android:id="@+id/txtC6"/>
                 <EditText
                     style="@style/item2"
+                    android:focusable="false"
                     android:id="@+id/txtK6"/>
             </LinearLayout>
 

@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProcessCommand pc;
     private static final int SETTING = 8888;
     //入力チェック用配列
-    EditText arrEditText[];
+    //EditText arrEditText[];
     //現在フォーカスチェック用
     EditText arrCantag[];
     EditText arrKokban[];
     //バイブ
     Vibrator vib;
     private long m_vibPattern_read[] = {0, 200};
-    private long m_vibPattern_error[] = {0, 200, 200, 500};
+    private long m_vibPattern_error[] = {0, 500, 200, 500};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,20 +106,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             focusToNextControl();
         }
         else if (cmd.equals(pc.CBN.getString())) {
-            if (excmd.equals("")) {
-                focusToNextControl();
+            boolean isDigit = true;
+            //サーバからの値が数値かどうかチェック
+            for (int i = 0; i < excmd.length(); i++) {
+                isDigit = Character.isDigit(excmd.charAt(i));
+                if (!isDigit) {
+                    break;
+                }
+            }
+            //数値の場合は成功、数値でない場合はエラーメッセージなので表示する
+            if (isDigit) {
+                setKokbanAfterCantagScan(excmd);
                 btnUpd.setEnabled(true);
             }
             else {
+                //バイブ エラー
+                vib.vibrate(m_vibPattern_error, -1);
                 //缶タグスキャンに戻る
                 backBeforeCantagScan();
                 show.setText(excmd);
             }
         }
         else if (cmd.equals(pc.UPD.getString())) {
-            MyToast.makeText(this, "登録完了しました。", Toast.LENGTH_SHORT, 32f).show();
-            initPage();
-            setShowMessage(0);
+            /*initPage();
+            setShowMessage(1);*/
+            //登録完了後はダイアログを表示し、アプリを終了させる
+            show.setText("");
+            new AlertDialog.Builder(this)
+                    .setTitle("確認")
+                    .setMessage("登録完了しました。")
+                    .setPositiveButton("終了", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // OK button pressed
+                            finishAndRemoveTask();
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
         }
         else if (cmd.equals(pc.MSG.getString())) {
             if (!excmd.equals("")) {
@@ -133,7 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //バイブ エラー
             vib.vibrate(m_vibPattern_error, -1);
             show.setText(excmd);
-            txtBcd.setText("");
+            initPage();
+            //txtBcd.setText("");
         }
         else if (cmd.equals(pc.ERR.getString())) {
             //バイブ エラー
@@ -155,8 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //缶タグ重複チェック
                     if (isScannedCantag(sMsg)) {
                         editText.setText(sMsg);
-                        btnUpd.setEnabled(false);
                         focusToNextControl();
+                        //カーボンコードチェックを行う
+                        String txt;
+                        txt = pc.CBN.getString();
+                        txt += m_cbncod;
+                        txt += "," + sMsg;
+                        sendMsgToServer(txt);
                     }
                 }
             }
@@ -176,16 +206,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtCarbon.setText("");
         m_cbncod = "";
         //ラベル項目初期化
-        for (int i = 0; i < arrEditText.length; i++) {
-            arrEditText[i].setText("");
+        for (int i = 0; i < arrCantag.length; i++) {
+            arrCantag[i].setText("");
 
             //!!! 注意 : (1),(2)の順番は変更しない。フォーカスが当たるようになってしまう。
             //(1)タップされてもキーボードを出さなくする
-            arrEditText[i].setRawInputType(InputType.TYPE_CLASS_TEXT);
-            arrEditText[i].setTextIsSelectable(true);
+            arrCantag[i].setRawInputType(InputType.TYPE_CLASS_TEXT);
+            arrCantag[i].setTextIsSelectable(true);
             //(2)フォーカスが当たらなくする
-            arrEditText[i].setFocusableInTouchMode(false);
-            arrEditText[i].setFocusable(false);
+            arrCantag[i].setFocusableInTouchMode(false);
+            arrCantag[i].setFocusable(false);
+        }
+        for (int i = 0; i < arrKokban.length; i++) {
+            arrKokban[i].setText("");
         }
         //
         txtBcd.setFocusableInTouchMode(true);
@@ -195,66 +228,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //次のコントロールにフォーカスを当てる
     private void focusToNextControl(){
-        for (int i = 0; i < arrEditText.length; i++) {
-            if (TextUtils.isEmpty(arrEditText[i].getText().toString())) {
+        for (int i = 0; i < arrCantag.length; i++) {
+            if (TextUtils.isEmpty(arrCantag[i].getText().toString())) {
                 if (i == 0) {
-                    arrEditText[i].setFocusableInTouchMode(true);
-                    arrEditText[i].setFocusable(true);
-                    arrEditText[i].requestFocus();
+                    arrCantag[i].setFocusableInTouchMode(true);
+                    arrCantag[i].setFocusable(true);
+                    arrCantag[i].requestFocus();
                     setShowMessage(i + 10);
                     return;
                 }
                 else {
-                    arrEditText[i - 1].setFocusableInTouchMode(false);
-                    arrEditText[i - 1].setFocusable(false);
+                    arrCantag[i - 1].setFocusableInTouchMode(false);
+                    arrCantag[i - 1].setFocusable(false);
 
-                    arrEditText[i].setFocusableInTouchMode(true);
-                    arrEditText[i].setFocusable(true);
-                    arrEditText[i].requestFocus();
+                    arrCantag[i].setFocusableInTouchMode(true);
+                    arrCantag[i].setFocusable(true);
+                    arrCantag[i].requestFocus();
                     setShowMessage(i + 10);
                     return;
                 }
             }
         }
         //最終まで値のセットが終わっている場合
-        int max = arrEditText.length - 1;
-        arrEditText[max].setFocusableInTouchMode(false);
-        arrEditText[max].setFocusable(false);
+        int max = arrCantag.length - 1;
+        arrCantag[max].setFocusableInTouchMode(false);
+        arrCantag[max].setFocusable(false);
         setShowMessage(99);
+    }
+
+    //缶タグタッチ後、サーバから得られた工管番号をセットする
+    private void setKokbanAfterCantagScan(String kokban){
+        for (int i = 0; i < arrKokban.length; i++) {
+            if (TextUtils.isEmpty(arrKokban[i].getText().toString())) {
+                //工管番号セット
+                arrKokban[i].setText(kokban);
+                //最終行にセット後のみ、メッセージを変える
+                if (i == arrKokban.length - 1) {
+                    setShowMessage(99);
+                }
+                else {
+                    setShowMessage(11);
+                }
+                break;
+            }
+        }
     }
 
     //カーボンが不一致だった場合、一行クリアする
     private void backBeforeCantagScan(){
         for (int i = 0; i < arrKokban.length; i++) {
             if (TextUtils.isEmpty(arrKokban[i].getText().toString())) {
-                arrCantag[i - 1].setText("");
-                arrCantag[i - 1].setFocusableInTouchMode(true);
-                arrCantag[i - 1].setFocusable(true);
-                arrCantag[i - 1].requestFocus();
-
-                arrKokban[i - 1].setText("");
-                arrKokban[i - 1].setFocusableInTouchMode(false);
-                arrKokban[i - 1].setFocusable(false);
-
-                //一行以上完成していたら、登録ボタンを有効化する
-                if (i > 1) {
-                    btnUpd.setEnabled(true);
-                }
+                arrCantag[i].setText("");
+                arrCantag[i].setFocusableInTouchMode(true);
+                arrCantag[i].setFocusable(true);
+                arrCantag[i].requestFocus();
                 return;
             }
         }
+        /*
         //最終まで値のセットが終わっている場合
-        int max = arrEditText.length - 1;
+        int max = arrCantag.length - 1;
         arrCantag[max].setText("");
         arrCantag[max].setFocusableInTouchMode(true);
         arrCantag[max].setFocusable(true);
         arrCantag[max].requestFocus();
-
-        arrKokban[max].setText("");
-        arrKokban[max].setFocusableInTouchMode(false);
-        arrKokban[max].setFocusable(false);
-
-        btnUpd.setEnabled(true);
+        */
     }
 
     //サーバから取得した情報（品番ロット）を表示
@@ -375,23 +413,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 0:
                 show.setText("工管No.をスキャンしてください。");
                 break;
+            case 1:
+                show.setText("登録完了しました。\n工管No.をスキャンしてください。");
+                break;
             case 10:
                 show.setText("缶タグをタッチしてください。");
                 break;
-            case 12:
-            case 14:
-            case 16:
-            case 18:
-            case 20:
-                show.setText("次の缶タグをタッチするか、\n登録してください。");
-                break;
             case 11:
-            case 13:
-            case 15:
-            case 17:
-            case 19:
-            case 21:
-                show.setText("工管No.をスキャンしてください。");
+                show.setText("次の缶タグをタッチするか、\n登録してください。");
                 break;
             case 88:
                 show.setText("サーバ接続エラー。");
@@ -401,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnUpd.setEnabled(true);
                 break;
             default:
-                show.setText("test" + order);
+                show.setText("code" + order);
         }
     }
 
@@ -433,12 +462,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtLotno = (EditText) findViewById(R.id.txtLotno);
         txtCarbon = (EditText) findViewById(R.id.txtCarbon);
         //----入力チェック用配列にセット
-        arrEditText = new EditText[]{(EditText) findViewById(R.id.txtC1), (EditText) findViewById(R.id.txtK1)
+        /*arrEditText = new EditText[]{(EditText) findViewById(R.id.txtC1), (EditText) findViewById(R.id.txtK1)
                                     ,(EditText) findViewById(R.id.txtC2), (EditText) findViewById(R.id.txtK2)
                                     ,(EditText) findViewById(R.id.txtC3), (EditText) findViewById(R.id.txtK3)
                                     ,(EditText) findViewById(R.id.txtC4), (EditText) findViewById(R.id.txtK4)
                                     ,(EditText) findViewById(R.id.txtC5), (EditText) findViewById(R.id.txtK5)
-                                    ,(EditText) findViewById(R.id.txtC6), (EditText) findViewById(R.id.txtK6)};
+                                    ,(EditText) findViewById(R.id.txtC6), (EditText) findViewById(R.id.txtK6)};*/
         //----現在フォーカスチェック用
         //cantag
         arrCantag = new EditText[]{(EditText) findViewById(R.id.txtC1)
@@ -454,10 +483,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     ,(EditText) findViewById(R.id.txtK4)
                                     ,(EditText) findViewById(R.id.txtK5)
                                     ,(EditText) findViewById(R.id.txtK6)};
+        /*
         //Changeイベントを実装
         for (EditText editText: arrKokban) {
             editText.addTextChangedListener(watchHandler);
         }
+        */
 
         //クリックイベント
         btnClear.setOnClickListener(this);
@@ -467,6 +498,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtBcd.requestFocus();
     }
 
+    /*
     //ラベルKokbanを読んだときの処理（匿名クラス）
     private TextWatcher watchHandler = new TextWatcher() {
         @Override
@@ -485,6 +517,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sendMsgToServer(txt);
         }
     };
+    */
 
     @Override
     protected void onResume() {
