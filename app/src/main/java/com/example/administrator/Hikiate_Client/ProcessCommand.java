@@ -14,6 +14,7 @@ public enum ProcessCommand {
     CLR("CLR", 1006),
     MSV("MSV", 1007),
     CBN("CBN", 1008),
+    BAC("BAC", 1009),
     OPE("OPE", 5555),
     UPD("UPD", 6001),
 

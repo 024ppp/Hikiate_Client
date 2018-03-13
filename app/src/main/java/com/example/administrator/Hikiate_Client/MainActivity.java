@@ -26,6 +26,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar toolbar;
     TextView show;
@@ -45,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //EditText arrEditText[];
     //現在フォーカスチェック用
     EditText arrCantag[];
-    EditText arrKokban[];
+    EditText arrLotno[];
+    List<String> arrKokban = new ArrayList<String>();
     //バイブ
     Vibrator vib;
     private long m_vibPattern_read[] = {0, 200};
@@ -106,26 +110,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             focusToNextControl();
         }
         else if (cmd.equals(pc.CBN.getString())) {
-            boolean isDigit = true;
-            //サーバからの値が数値かどうかチェック
-            for (int i = 0; i < excmd.length(); i++) {
-                isDigit = Character.isDigit(excmd.charAt(i));
-                if (!isDigit) {
-                    break;
-                }
-            }
-            //数値の場合は成功、数値でない場合はエラーメッセージなので表示する
-            if (isDigit) {
-                setKokbanAfterCantagScan(excmd);
-                btnUpd.setEnabled(true);
-            }
-            else {
-                //バイブ エラー
-                vib.vibrate(m_vibPattern_error, -1);
-                //缶タグスキャンに戻る
-                backBeforeCantagScan();
-                show.setText(excmd);
-            }
+            setInfoAfterCantagScan(excmd);
+            btnUpd.setEnabled(true);
+        }
+        else if (cmd.equals(pc.BAC.getString())) {
+            //バイブ エラー
+            vib.vibrate(m_vibPattern_error, -1);
+            //缶タグスキャンに戻る
+            backBeforeCantagScan();
+            show.setText(excmd);
         }
         else if (cmd.equals(pc.UPD.getString())) {
             /*initPage();
@@ -217,9 +210,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             arrCantag[i].setFocusableInTouchMode(false);
             arrCantag[i].setFocusable(false);
         }
-        for (int i = 0; i < arrKokban.length; i++) {
-            arrKokban[i].setText("");
+        for (int i = 0; i < arrLotno.length; i++) {
+            arrLotno[i].setText("");
         }
+
+        //工管番号配列をクリア
+        arrKokban.clear();
+
         //
         txtBcd.setFocusableInTouchMode(true);
         txtBcd.setFocusable(true);
@@ -257,13 +254,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //缶タグタッチ後、サーバから得られた工管番号をセットする
-    private void setKokbanAfterCantagScan(String kokban){
-        for (int i = 0; i < arrKokban.length; i++) {
-            if (TextUtils.isEmpty(arrKokban[i].getText().toString())) {
-                //工管番号セット
-                arrKokban[i].setText(kokban);
+    private void setInfoAfterCantagScan(String info){
+        for (int i = 0; i < arrLotno.length; i++) {
+            if (TextUtils.isEmpty(arrLotno[i].getText().toString())) {
+                String[] items = info.split(",");
+
+                arrKokban.add(items[0]);
+
+                arrLotno[i].setText(items[1]);
                 //最終行にセット後のみ、メッセージを変える
-                if (i == arrKokban.length - 1) {
+                if (i == arrLotno.length - 1) {
                     setShowMessage(99);
                 }
                 else {
@@ -276,8 +276,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //カーボンが不一致だった場合、一行クリアする
     private void backBeforeCantagScan(){
-        for (int i = 0; i < arrKokban.length; i++) {
-            if (TextUtils.isEmpty(arrKokban[i].getText().toString())) {
+        for (int i = 0; i < arrLotno.length; i++) {
+            if (TextUtils.isEmpty(arrLotno[i].getText().toString())) {
                 arrCantag[i].setText("");
                 arrCantag[i].setFocusableInTouchMode(true);
                 arrCantag[i].setFocusable(true);
@@ -364,7 +364,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else {
                 txt += arrCantag[i].getText().toString() + ",";
-                txt += arrKokban[i].getText().toString() + ",";
+                txt += arrKokban.get(i) + ",";
             }
         }
         txt = txt.substring(0, txt.length() - 1);
@@ -476,8 +476,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     ,(EditText) findViewById(R.id.txtC4)
                                     ,(EditText) findViewById(R.id.txtC5)
                                     ,(EditText) findViewById(R.id.txtC6)};
-        //kokban
-        arrKokban = new EditText[]{(EditText) findViewById(R.id.txtK1)
+        //Lotno
+        arrLotno = new EditText[]{(EditText) findViewById(R.id.txtK1)
                                     ,(EditText) findViewById(R.id.txtK2)
                                     ,(EditText) findViewById(R.id.txtK3)
                                     ,(EditText) findViewById(R.id.txtK4)
@@ -485,7 +485,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     ,(EditText) findViewById(R.id.txtK6)};
         /*
         //Changeイベントを実装
-        for (EditText editText: arrKokban) {
+        for (EditText editText: arrLotno) {
             editText.addTextChangedListener(watchHandler);
         }
         */
